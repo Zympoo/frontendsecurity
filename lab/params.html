@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Zoekresultaat</h1>
+    <div id="result"></div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const q = params.get("q");
+        document.getElementById("result").textContent = q;
+    </script>
+</body>
+</html>

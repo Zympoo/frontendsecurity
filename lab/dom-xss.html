@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM XSS Lab</title>
+</head>
+
+<body>
+    <h1>DOM XSS Demo</h1>
+    <input id="comment" placeholder="Plaats commentaar">
+    <button id="post">Post</button>
+    <div id="comments"></div>
+    <script>
+        const input = document.getElementById("comment");
+        const postBtn = document.getElementById("post");
+        const comments = document.getElementById("comments");
+        postBtn.addEventListener("click", () => {
+            const text = input.value;
+
+            const p = document.createElement("p");
+            p.textContent = text;
+
+            comments.appendChild(p);
+        });
+    </script>
+</body>
+</html>

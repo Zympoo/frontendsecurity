@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Origin A</title>
+</head>
+
+<body>
+    <h1>Origin A</h1>
+    <button id="btn">Fetch data van Origin B</button>
+    <pre id="output"></pre>
+    <script>
+        const btn = document.getElementById("btn");
+        const output = document.getElementById("output");
+        btn.addEventListener("click", async () => {
+            try {
+                const res = await fetch("http://localhost:5501/les-0-2 / securefrontend - lab / origin - b / data.json");
+                const text = await res.text();
+                output.textContent = text;
+            } catch (e) {
+                output.textContent = e.toString();
+            }
+        });
+    </script>
+</body>
+
+</html>

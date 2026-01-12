@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profiel</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .profile {
+            max-width: 600px;
+            margin: 40px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            margin-bottom:
+                10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile">
+        <div class="avatar"></div>
+        <h2 id="username"></h2>
+        <div id="bio"></div>
+    </div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const user = params.get("user");
+        const bio = params.get("bio");
+        if (user) {
+            document.getElementById("username").textContent = user;
+        }
+        if (bio) {
+            document.getElementById("bio").textContent = bio;
+        }
+    </script>
+</body>
+</html>
