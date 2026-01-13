@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Attacker - Token collector</title>
+</head>
+
+<body>
+    <h1>Attacker pagina</h1>
+    <p>Als je hier een token ziet, is er token leakage.</p>
+    <pre id="out"></pre>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const token = params.get("token");
+        document.getElementById("out").textContent =
+            token ? ("GESTOLEN TOKEN:\n" + token) : "Geen token ontvangen.";
+    </script>
+</body>
+
+</html>

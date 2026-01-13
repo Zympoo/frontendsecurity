@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Cookie demo</h1>
+    <button id="login">Login</button>
+    <button id="show">Toon cookies</button>
+    <pre id="output"></pre>
+    <script>
+        document.getElementById("login").addEventListener("click", () => {
+            document.cookie = "Set-Cookie: sessionId=abc123; HttpOnly; Secure; SameSite=Lax; Path=/";
+            output.textContent = "Cookie gezet";
+        });
+        76
+        document.getElementById("show").addEventListener("click", () => {
+            output.textContent = document.cookie;
+        });
+    </script>
+</body>
+
+</html>

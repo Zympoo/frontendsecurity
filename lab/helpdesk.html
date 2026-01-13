@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Helpdesk Portal</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        .app {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding:
+                30px;
+            border-radius: 6px;
+        }
+
+        .alert {
+            background: #ffe0e0;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ticket {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .link {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <h1>Helpdesk</h1>
+        <p>Welkom, <strong id="user"></strong></p>
+        <div id="statusBox"></div>
+        <div class="ticket">
+            <h3>Ticket #45821</h3>
+            <p>Probleem met login</p>
+            <p>Status: <span id="status"></span></p>
+        </div>
+        <div class="link">
+            <a id="supportLink" href="#">Contacteer support</a>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const user = params.get("user");
+        const status = params.get("status");
+        const redirect = params.get("redirect");
+        if (user) {
+            document.getElementById("user").textContent = user;
+        }
+        if (status) {
+            const box = document.getElementById("statusBox");
+            const msg = document.createElement("div");
+            msg.className = "alert";
+            msg.textContent = "Systeemmelding: " + status;
+            box.appendChild(msg);
+            document.getElementById("status").textContent = status;
+        }
+        if (redirect) {
+            if (redirect && redirect.startsWith("https://support.bedrijf.be")) {
+                document.getElementById("supportLink").href = redirect;
+            }
+        }
+    </script>
+</body>
+
+</html>

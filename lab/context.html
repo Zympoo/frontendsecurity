@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <img id="pic">
+    <script>
+        const params = new URLSearchParams(location.search);
+        const img = params.get("img");
+        if (img && img.startsWith("https://")) {
+            pic.src = img;
+        }
+    </script>
+</body>
+
+</html>

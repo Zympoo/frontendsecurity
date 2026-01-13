@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reflected XSS Lab</title>
+</head>
+
+<body>
+    <h1>Zoekpagina</h1>
+    <form>
+        <input name="q" placeholder="Zoekterm">
+        <button>Zoek</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const q = params.get("q");
+        if (q) {
+            document.getElementById("result").textContent = "Resultaat voor: " + q;
+        }
+    </script>
+</body>
+</html>

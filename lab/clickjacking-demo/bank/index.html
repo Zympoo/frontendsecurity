@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mijn Bank</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: system-ui, Arial, sans-serif;
+            background: #f3f5f9;
+            /* Cruciaal: alles exact centreren */
+            display: grid;
+            place-items: center;
+        }
+
+        .card {
+            width: min(720px, 92vw);
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 34px;
+        }
+
+        .saldo {
+            font-size: 20px;
+            margin: 0 0 22px;
+            color: #222;
+        }
+
+        .muted {
+            color: #556;
+            margin: 0 0 18px;
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 18px;
+            background: #3b5bfd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2f49d8;
+        }
+
+        #result {
+            margin-top: 18px;
+            font-size: 16px;
+            color: #111;
+            min-height: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Mijn Bank</h1>
+        <div class="saldo">Saldo: € 10.000</div>
+        <p class="muted">
+            Demo: deze knop stelt een gevoelige actie voor (bv. overschrijving,
+            toestemming, account change).
+            Klikken verandert de UI zodat je het resultaat altijd ziet.
+        </p>
+        <button id="transferBtn">Maak overschrijving van € 1.000</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        document.getElementById("transferBtn").addEventListener("click", () => {
+            document.getElementById("result").textContent =
+                "✅ Overschrijving uitgevoerd: € 1.000 verstuurd naar attacker";
+        });
+    </script>
+</body>
+
+</html>

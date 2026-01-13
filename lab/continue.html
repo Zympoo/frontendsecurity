@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bevestigd</title>
+    <style>
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            max-width: 760px;
+            margin: 60px auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .muted {
+            color: #667;
+        }
+
+        code {
+            background: #f5f7fb;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Email bevestigd</h1>
+        <p class="muted">
+            Je account is geactiveerd. Je wordt automatisch doorgestuurd…
+        </p>
+        <p class="muted">
+            Debug: <code id="dbg"></code>
+        </p>
+    </div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const returnTo = params.get("returnTo");
+        document.getElementById("dbg").textContent = "returnTo=" + (returnTo ||
+            "(geen)");
+        
+        const allowed = new Set([
+            "/dashboard",
+            "/profile",
+            "/billing"
+        ]);
+        function normalizePath(p) {
+            // Alleen pad, geen protocol/host/query
+            // Reject alles dat niet met "/" start
+            if (!p || !p.startsWith("/")) return null;
+            // Normaliseer dubbele slashes
+            if (p.startsWith("//")) return null; // protocol-relative aanval
+            return p;
+        }
+        const safe = normalizePath(returnTo);
+        if (safe && allowed.has(safe)) {
+            location.assign(safe);
+            101
+        } else {
+            location.assign("/dashboard");
+        }
+    </script>
+</body>
+
+</html>

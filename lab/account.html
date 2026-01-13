@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Account Settings</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 8px 12px;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .row>* {
+            flex: 1;
+            min-width: 260px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Account Settings</h1>
+    <div class="card">
+        <h3>1) Login (simulatie)</h3>
+        <button id="login">Login (zet token in LocalStorage)</button>
+        <button id="logout">Logout (clear LocalStorage)</button>
+        <pre id="status"></pre>
+    </div>
+    <div class="card">
+        <h3>2) Welkomstboodschap (wordt opgeslagen)</h3>
+        <p>Deze boodschap wordt bewaard in LocalStorage en bij elke page load
+            getoond.</p>
+        <input id="message" placeholder="Typ je welkomstboodschap">
+        <button id="save">Opslaan</button>
+    </div>
+    <div class="card">
+        <h3>3) Dashboard</h3>
+        <p>Hier wordt de opgeslagen boodschap gerenderd.</p>
+        <div id="dashboard"></div>
+    </div>
+    <script>
+        const status = document.getElementById("status");
+        const dashboard = document.getElementById("dashboard");
+        const messageInput = document.getElementById("message");
+        function render() {
+            const token = localStorage.getItem("authToken");
+            const msg = localStorage.getItem("welcomeMessage");
+            status.textContent =
+                "authToken in LocalStorage: " + (token ? token : "(geen)") + "\n" +
+                "welcomeMessage in LocalStorage: " + (msg ? msg : "(geen)");
+            // BEWUST ONVEILIG: parsing + execution
+            if (msg) {
+                dashboard.innerHTML = ""; // mag, want je injecteert daarna geen user HTML
+                const card = document.createElement("div");
+                card.className = "card";
+                const title = document.createElement("strong");
+                title.textContent = "Welkom!";
+                const br = document.createElement("br");
+                const text = document.createElement("span");
+                text.textContent = msg;
+                card.appendChild(title);
+                card.appendChild(br);
+                card.appendChild(text);
+                dashboard.appendChild(card);
+            } else {
+                dashboard.innerHTML = "<div class='card'>(Geen boodschap opgeslagen)</div > ";
+            }
+        }
+        document.getElementById("login").addEventListener("click", () => {
+            // Simuleer een token dat gevoelig is
+            localStorage.setItem("authToken", "TOKEN-" +
+                Math.random().toString(16).slice(2));
+            render();
+        });
+        document.getElementById("logout").addEventListener("click", () => {
+            localStorage.clear();
+            render();
+        });
+        document.getElementById("save").addEventListener("click", () => {
+            localStorage.setItem("welcomeMessage", messageInput.value);
+            render();
+        });
+        // render bij page load (belangrijk voor "stored" gedrag)
+        render();
+    </script>
+</body>
+
+</html>
